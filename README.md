@@ -1,5 +1,5 @@
 
-#Updater by Guerrilla Dynamics
+# Updated by  Guerrilla Dynamics
 FTS Version 1.98 with RTSP Server Built In
 # FreeTAKServer-Docker
 The official Docker image for FreeTAKServer.
