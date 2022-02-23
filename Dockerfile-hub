@@ -24,17 +24,17 @@ RUN pip3 install supervisor &&\
     pip3 install defusedxml &&\
     pip3 install pyopenssl &&\
     pip3 install pytak &&\
-    pip3 install itsdangerous==2.0.1 &&\
-    pip3 install markupsafe==2.0.1
+#    pip3 install itsdangerous==2.0.1 &&\
+#    pip3 install markupsafe==2.0.1
 
 
 #MAP
-#RUN /bin/sh -c wget https://github.com/FreeTAKTeam/FreeTAKHub/releases/download/v${FTS_MAP_VERSION}/FTH-webmap-linux-${FTS_MAP_VERSION}.zip     -O /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
-#    cd /opt &&\
-#    unzip /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
-#    mv /opt/FTH-webmap-linux-${FTS_MAP_VERSION} /opt/FTH-webmap-linux &&\
-#   chmod a+x /opt/FTH-webmap-linux &&\
-#    echo '{ "BOT_TOKEN": "Example123", "FTH_FTS_URL": "127.0.0.1", "ChatId": "example123", "FTH_FTS_API_Auth": "exampleauth", "FTH_FTS_API_Port": 19023, "FTH_FTS_TCP_Port": 8087 }' > /opt/config.json
+RUN /bin/sh -c wget https://github.com/FreeTAKTeam/FreeTAKHub/releases/download/v${FTS_MAP_VERSION}/FTH-webmap-linux-${FTS_MAP_VERSION}.zip     -O /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
+    cd /opt &&\
+    unzip /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
+    mv /opt/FTH-webmap-linux-${FTS_MAP_VERSION} /opt/FTH-webmap-linux &&\
+    chmod a+x /opt/FTH-webmap-linux &&\
+    echo '{ "BOT_TOKEN": "Example123", "FTH_FTS_URL": "127.0.0.1", "ChatId": "example123", "FTH_FTS_API_Auth": "exampleauth", "FTH_FTS_API_Port": 19023, "FTH_FTS_TCP_Port": 8087 }' > /opt/config.json
 
 #RTSP
 RUN wget "https://github.com/aler9/rtsp-simple-server/releases/download/v0.17.17/rtsp-simple-server_v0.17.17_linux_arm64v8.tar.gz"      -O /opt/rtsp-simple-server_v0.17.17_linux_arm64v8.tar.gz &&\ 
