@@ -1,6 +1,7 @@
 
 # Updated by  Guerrilla Dynamics
-FTS Version 1.98 with RTSP Server Built In AMD64 branch
+FTS Version 1.98 with RTSP Server AMD64 branch
+docker run -d -p 8554:8554 -p 1935:1935 -p 9997:9997 -v $PWD/rtsp-simple-server.yml:/rtsp-simple-server.yml --name rtsp aler9/rtsp-simple-server 
 # FreeTAKServer-Docker
 The official Docker image for FreeTAKServer.
 
@@ -13,7 +14,7 @@ Image Name:
 When using this docker container it is suggested that you use the `--restart unless-stopped` flag as shown in the examples.  This will enure that the service automatically starts with the host and will restart if it encounters an error and crashes.  The port mappings in the examples are required to make the service accessable to hosts.  All environment variables are optional.  All data is stored in a single directory for ease of persistent data between container versions.
 
 ```bash
-docker run -d -v fts_data:/data -p 5000:5000 -p 8080:8080 -p 8087:8087 -p 8089:8089 -p 8443:8443 -p 19023:19023 -p 5000:5000 -p 9997:9997 -p 1935:1935 -p 8554:8554 -p 8888:8888 --env IP=192.168.0.123 --env MSG="This is my first FTS!" --name MyFirstTakServer guerrilladynamics/freetakserver:1.9.8
+docker run -d -v fts_data:/data -p 5000:5000 -p 8080:8080 -p 8087:8087 -p 8089:8089 -p 8443:8443 -p 19023:19023 -p 5000:5000 --env IP=192.168.0.123 --env MSG="This is my first FTS" --name fts guerrilladynamics/freetakserver:1.9.8
 ```
 
 ### Ports
