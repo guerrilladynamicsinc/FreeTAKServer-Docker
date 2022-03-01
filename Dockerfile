@@ -24,23 +24,26 @@ RUN pip3 install supervisor &&\
     pip3 install defusedxml &&\
     pip3 install pyopenssl &&\
     pip3 install pytak &&\
-    pip3 install itsdangerous==2.0.1 &&\
-    pip3 install markupsafe==2.0.1
+#    pip3 install itsdangerous==2.0.1 &&\
+#    pip3 install markupsafe==2.0.1
 
 
 #MAP
-#RUN /bin/sh -c wget https://github.com/FreeTAKTeam/FreeTAKHub/releases/download/v${FTS_MAP_VERSION}/FTH-webmap-linux-${FTS_MAP_VERSION}.zip     -O /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
-#    cd /opt &&\
-#    unzip /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
-#    mv /opt/FTH-webmap-linux-${FTS_MAP_VERSION} /opt/FTH-webmap-linux &&\
-#   chmod a+x /opt/FTH-webmap-linux &&\
-#    echo '{ "BOT_TOKEN": "Example123", "FTH_FTS_URL": "127.0.0.1", "ChatId": "example123", "FTH_FTS_API_Auth": "exampleauth", "FTH_FTS_API_Port": 19023, "FTH_FTS_TCP_Port": 8087 }' > /opt/config.json
+RUN /bin/sh -c wget https://github.com/FreeTAKTeam/FreeTAKHub/releases/download/v${FTS_MAP_VERSION}/FTH-webmap-linux-${FTS_MAP_VERSION}.zip     -O /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
+    cd /opt &&\
+    unzip /opt/FTH-webmap-linux-${FTS_MAP_VERSION}.zip &&\
+    mv /opt/FTH-webmap-linux-${FTS_MAP_VERSION} /opt/FTH-webmap-linux &&\
+    chmod a+x /opt/FTH-webmap-linux &&\
+    echo '{ "BOT_TOKEN": "Example123", "FTH_FTS_URL": "127.0.0.1", "ChatId": "example123", "FTH_FTS_API_Auth": "exampleauth", "FTH_FTS_API_Port": 19023, "FTH_FTS_TCP_Port": 8087 }' > /opt/config.json
 
 #RTSP
-RUN wget "https://github.com/aler9/rtsp-simple-server/releases/download/v0.17.17/rtsp-simple-server_v0.17.17_linux_arm64v8.tar.gz"      -O /opt/rtsp-simple-server_v0.17.17_linux_arm64v8.tar.gz &&\ 
+RUN wget "https://github.com/aler9/rtsp-simple-server/releases/download/v0.17.17/rtsp-simple-server_v0.17.17_linux_amd64.tar.gz"      -O /opt/rtsp-simple-server_v0.17.17_linux_amd64.tar.gz &&\ 
     cd /opt &&\
-    tar -xzf rtsp-simple-server_v0.17.17_linux_arm64v8.tar.gz &&\
+    tar -xzf rtsp-simple-server_v0.17.17_linux_amd64.tar.gz &&\
     chmod a+x /opt/rtsp-simple-server
+#RTSP Config
+# 
+COPY rtsp-simple-server.yml /opt/rtsp-simple-server.yml
 # Create FTS user
 RUN addgroup --gid 1000 fts && \
     adduser --disabled-password --uid 1000 --ingroup fts --home /home/fts fts
@@ -73,6 +76,7 @@ EXPOSE 800
 EXPOSE 8554
 EXPOSE 1935
 EXPOSE 8888
+EXPOSE 9997
 # UI Config changes
 RUN sed -i 's/root/data/g' /usr/local/lib/python3.8/dist-packages/FreeTAKServer-UI/config.py &&\
     sed -i 's+certpath = .*+certpath = "/data/certs/"+g' /usr/local/lib/python3.8/dist-packages/FreeTAKServer-UI/config.py  &&\
